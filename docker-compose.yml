@@ -16,7 +16,7 @@ services:
     mem_limit: 512M
     depends_on:
       - config-server
-    entrypoint: ["./dockerize","-wait=tcp://config-server:8888","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=discovery-server,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://config-server:8888","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=discovery-server,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 8761:8761
 
@@ -29,7 +29,7 @@ services:
     depends_on:
       - config-server
       - discovery-server
-    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=customers-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=customers-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 8081:8081
 
@@ -42,7 +42,7 @@ services:
     depends_on:
       - config-server
       - discovery-server
-    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=visits-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=visits-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 8082:8082
 
@@ -55,7 +55,7 @@ services:
     depends_on:
       - config-server
       - discovery-server
-    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=vets-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=vets-service,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 8083:8083
 
@@ -68,7 +68,7 @@ services:
     depends_on:
       - config-server
       - discovery-server
-    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=api-gateway,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=api-gateway,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 8080:8080
 
@@ -90,6 +90,6 @@ services:
     depends_on:
       - config-server
       - discovery-server
-    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=60s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=admin-server,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    entrypoint: ["./dockerize","-wait=tcp://discovery-server:8761","-timeout=120s","--","java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-javaagent:/data/drill-proxy.jar=ttl.agent.logger:STDOUT", "-agentpath:/data/libdrill_agent.so=drillInstallationDir=/data,adminAddress=${adminAddress}:8090,agentId=admin-server,serviceGroupId=${serviceGroupId}", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
       - 9090:9090
